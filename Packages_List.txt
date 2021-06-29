@@ -1,0 +1,6 @@
+Packages:
+
+Pytorch
+openCv
+EasyOCR
+imutils
