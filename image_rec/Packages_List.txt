@@ -4,3 +4,4 @@ Pytorch
 openCv
 EasyOCR
 imutils
+PyQt5
