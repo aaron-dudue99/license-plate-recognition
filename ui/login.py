@@ -13,32 +13,45 @@ from PyQt5.QtWidgets import QMessageBox
 import sys
 import mysql.connector as mc
 
+mydb = mc.connect(
+    host="localhost",
+    user="root",
+    passwd="@ADS5188y",
+    database="license_plate_rec"
+)
+
 
 class Ui_Form(object):
+    def show_popup(self,message,title,status):
+        msg= QMessageBox()
+        msg.setWindowTitle(title)
+        msg.setText(message)
+
+        if status == "Failed":
+            msg.setIcon(QMessageBox.Critical)
+            msg.setStandardButtons(QMessageBox.Retry|QMessageBox.Cancel)
+
+        elif status == "Success":
+            msg.setIcon(QMessageBox.Information)
+
+        x= msg.exec_()
+
     def login(self):
         try:
             username = self.lineEdit_3.text()
             passwd = self.lineEdit_2.text()
 
-            mydb = mc.connect(
-                host="localhost",
-                user="root",
-                password="@ADS5188y",
-                database="license_plate_rec"
-            )
-
             mycursor = mydb.cursor()
-            query = "SELECT username, password from  login_details where username like '" +username + "' and password like '" + passwd + ";"
+            query = "SELECT * FROM login_details WHERE BINARY username = '%s' AND BINARY password = '%s'" % (username, passwd)
             mycursor.execute(query)
             result = mycursor.fetchone()
 
             if result == None:
-                QMessageBox.warning(
-                    self, 'Incorrect', 'Incorrect Email or Password', QMessageBox.Retry | QMessageBox.Cancel)
-
+                print('Login Failed')
+                self.show_popup("Login Failed, Check Username and Password", "Login Failed", 'Failed')
             else:
-                QMessageBox.information(
-                    self, "Success", "Welcome '" + username, QMessageBox.Ok)
+                self.show_popup("Login Success, Welcome!!", "Success", 'Success')
+
         except mc.Error as e:
             print('failed')
 
