@@ -3,3 +3,5 @@ bleu: #14213D
 orange: #fca311
 silver: #e5e5e5
 white: #fff
+
+font-family: EB Garamond
