@@ -1,6 +1,7 @@
 black : #000
 bleu: #14213D
 orange: #fca311
+red
 silver: #e5e5e5
 white: #fff
 
