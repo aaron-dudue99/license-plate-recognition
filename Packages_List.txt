@@ -5,3 +5,4 @@ openCv
 EasyOCR
 imutils
 PyQt5
+PySide2
