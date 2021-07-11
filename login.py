@@ -52,7 +52,8 @@ class Ui_Form(object):
                 self.show_popup("Login Failed, Check Username and Password", "Login Failed", 'Failed')
             else:
                 self.show_popup("Login Success, Welcome!!", "Success", 'Success')
-                self.close()
+                # self.close()
+                Form.setVisible(False)
                 MainWindow().show()
         except mc.Error as e:
             print('failed')

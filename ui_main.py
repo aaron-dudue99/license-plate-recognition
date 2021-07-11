@@ -12,6 +12,7 @@ from PySide2.QtCore import *
 from PySide2.QtGui import *
 from PySide2.QtWidgets import *
 
+from functions import browseFiles
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -171,10 +172,11 @@ class Ui_MainWindow(object):
         self.label_10.setAlignment(Qt.AlignCenter)
         self.label_11 = QLabel(self.homepage)
         self.label_11.setObjectName(u"label_11")
-        self.label_11.setGeometry(QRect(140, 110, 631, 241))
+        self.label_11.setGeometry(QRect(140, 90, 631, 241))
+        self.label_11.setStyleSheet(u"border: 0.8px solid rgb(85,170,255);")
         self.lineEdit_5 = QLineEdit(self.homepage)
         self.lineEdit_5.setObjectName(u"lineEdit_5")
-        self.lineEdit_5.setGeometry(QRect(200, 390, 331, 21))
+        self.lineEdit_5.setGeometry(QRect(200, 360, 331, 21))
         font2 = QFont()
         font2.setFamily(u"EB Garamond Medium")
         font2.setPointSize(11)
@@ -195,15 +197,29 @@ class Ui_MainWindow(object):
 "QPushButton:hover {\n"
 "	background-color: rgb(85, 170, 255);\n"
 "}")
-        self.btnDelete_2 = QPushButton(self.homepage)
-        self.btnDelete_2.setObjectName(u"btnDelete_2")
-        self.btnDelete_2.setGeometry(QRect(550, 390, 111, 21))
+        self.btnBrowse = QPushButton(self.homepage)
+        self.btnBrowse.setObjectName(u"btnBrowse")
+        self.btnBrowse.setGeometry(QRect(550, 360, 111, 21))
         font3 = QFont()
         font3.setFamily(u"EB Garamond Medium")
         font3.setPointSize(12)
-        self.btnDelete_2.setFont(font3)
-        self.btnDelete_2.setCursor(QCursor(Qt.PointingHandCursor))
-        self.btnDelete_2.setStyleSheet(u"QPushButton {\n"
+        self.btnBrowse.setFont(font3)
+        self.btnBrowse.setCursor(QCursor(Qt.PointingHandCursor))
+        self.btnBrowse.setStyleSheet(u"QPushButton {\n"
+"	color:#e5e5e5;\n"
+"	background-color: rgba(35, 35, 35,0);\n"
+"	border: 2px solid rgb(85,170,255);\n"
+"    border-radius: 5px\n"
+"}\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(85, 170, 255);\n"
+"}")
+        self.btnScan = QPushButton(self.homepage)
+        self.btnScan.setObjectName(u"btnScan")
+        self.btnScan.setGeometry(QRect(390, 410, 111, 21))
+        self.btnScan.setFont(font3)
+        self.btnScan.setCursor(QCursor(Qt.PointingHandCursor))
+        self.btnScan.setStyleSheet(u"QPushButton {\n"
 "	color:#e5e5e5;\n"
 "	background-color: rgba(35, 35, 35,0);\n"
 "	border: 2px solid rgb(85,170,255);\n"
@@ -355,7 +371,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(2)
+        self.stackedWidget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -369,7 +385,9 @@ class Ui_MainWindow(object):
         self.label_10.setText(QCoreApplication.translate("MainWindow", u"License PLate Recognition Homepage", None))
         self.label_11.setText("")
         self.btnNew_2.setText(QCoreApplication.translate("MainWindow", u"New", None))
-        self.btnDelete_2.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
+        self.btnBrowse.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
+        # self.btnBrowse.clicked.connect(self.showImage)
+        self.btnScan.setText(QCoreApplication.translate("MainWindow", u"Scan", None))
         self.btnView.setText(QCoreApplication.translate("MainWindow", u"View", None))
         self.btnDelete.setText(QCoreApplication.translate("MainWindow", u"Delete", None))
         self.label_9.setText(QCoreApplication.translate("MainWindow", u"List of All Cars", None))
@@ -390,3 +408,20 @@ class Ui_MainWindow(object):
         self.btnSave.setText(QCoreApplication.translate("MainWindow", u"Save", None))
     # retranslateUi
 
+class ImageViewer(QWidget):
+    def __init__(self, image_path):
+        super().__init__()
+
+        self.scene = QGraphicsScene()
+        self.view = QGraphicsView(self.scene)
+        layout = QVBoxLayout()
+        layout.addWidget(self.view)
+        self.setLayout(layout)
+
+        self.load_image(image_path)
+
+    def load_image(self, image_path):
+        pixmap = QPixmap(image_path)
+        self.scene.addPixmap(pixmap)
+        self.view.fitInView(QRectF(0, 0, pixmap.width(), pixmap.height()), Qt.KeepAspectRatio)
+        self.scene.update()

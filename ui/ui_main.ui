@@ -337,7 +337,7 @@ QPushButton:hover {
           <item>
            <widget class="QStackedWidget" name="stackedWidget">
             <property name="currentIndex">
-             <number>2</number>
+             <number>0</number>
             </property>
             <widget class="QWidget" name="homepage">
              <widget class="QLabel" name="label_10">
@@ -369,10 +369,13 @@ QPushButton:hover {
               <property name="geometry">
                <rect>
                 <x>140</x>
-                <y>110</y>
+                <y>90</y>
                 <width>631</width>
                 <height>241</height>
                </rect>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">border: 0.8px solid rgb(85,170,255);</string>
               </property>
               <property name="text">
                <string/>
@@ -382,7 +385,7 @@ QPushButton:hover {
               <property name="geometry">
                <rect>
                 <x>200</x>
-                <y>390</y>
+                <y>360</y>
                 <width>331</width>
                 <height>21</height>
                </rect>
@@ -438,11 +441,11 @@ QPushButton:hover {
                <string>New</string>
               </property>
              </widget>
-             <widget class="QPushButton" name="btnDelete_2">
+             <widget class="QPushButton" name="btnBrowse">
               <property name="geometry">
                <rect>
                 <x>550</x>
-                <y>390</y>
+                <y>360</y>
                 <width>111</width>
                 <height>21</height>
                </rect>
@@ -469,6 +472,39 @@ QPushButton:hover {
               </property>
               <property name="text">
                <string>Browse</string>
+              </property>
+             </widget>
+             <widget class="QPushButton" name="btnScan">
+              <property name="geometry">
+               <rect>
+                <x>390</x>
+                <y>410</y>
+                <width>111</width>
+                <height>21</height>
+               </rect>
+              </property>
+              <property name="font">
+               <font>
+                <family>EB Garamond Medium</family>
+                <pointsize>12</pointsize>
+               </font>
+              </property>
+              <property name="cursor">
+               <cursorShape>PointingHandCursor</cursorShape>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QPushButton {
+	color:#e5e5e5;
+	background-color: rgba(35, 35, 35,0);
+	border: 2px solid rgb(85,170,255);
+    border-radius: 5px
+}
+QPushButton:hover {
+	background-color: rgb(85, 170, 255);
+}</string>
+              </property>
+              <property name="text">
+               <string>Scan</string>
               </property>
              </widget>
             </widget>
