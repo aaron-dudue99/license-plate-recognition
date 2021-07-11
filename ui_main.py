@@ -314,6 +314,9 @@ class Ui_MainWindow(object):
         self.comboBox_2 = QComboBox(self.groupBox_2)
         self.comboBox_2.setObjectName(u"comboBox_2")
         self.comboBox_2.setGeometry(QRect(140, 70, 181, 22))
+        self.positions = ['Lecturer', 'Staff']
+        self.comboBox_2.addItems(self.positions)
+        self.comboBox_2.setFont(font2)
         self.comboBox_2.setFrame(True)
         self.label_8 = QLabel(self.new_car)
         self.label_8.setObjectName(u"label_8")
@@ -324,6 +327,9 @@ class Ui_MainWindow(object):
         self.comboBox.setObjectName(u"comboBox")
         self.comboBox.setGeometry(QRect(230, 310, 201, 22))
         self.comboBox.setFont(font2)
+        self.posts = ["Lecturers' Bay", "Staff Bay"]
+        self.comboBox.addItems(self.posts)
+        self.comboBox.setStyleSheet(u"color: #fff;")
         self.btnSave = QPushButton(self.new_car)
         self.btnSave.setObjectName(u"btnSave")
         self.btnSave.setGeometry(QRect(380, 380, 111, 31))
@@ -349,7 +355,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(2)
 
 
         QMetaObject.connectSlotsByName(MainWindow)

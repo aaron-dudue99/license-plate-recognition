@@ -337,7 +337,7 @@ QPushButton:hover {
           <item>
            <widget class="QStackedWidget" name="stackedWidget">
             <property name="currentIndex">
-             <number>0</number>
+             <number>2</number>
             </property>
             <widget class="QWidget" name="homepage">
              <widget class="QLabel" name="label_10">
@@ -852,6 +852,12 @@ outline:none;
                  <height>22</height>
                 </rect>
                </property>
+               <property name="font">
+                <font>
+                 <family>EB Garamond Medium</family>
+                 <pointsize>11</pointsize>
+                </font>
+               </property>
                <property name="frame">
                 <bool>true</bool>
                </property>
@@ -893,6 +899,9 @@ outline:none;
                 <family>EB Garamond Medium</family>
                 <pointsize>11</pointsize>
                </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">color: #fff;</string>
               </property>
              </widget>
              <widget class="QPushButton" name="btnSave">

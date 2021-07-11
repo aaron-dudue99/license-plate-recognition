@@ -12,6 +12,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox
 import sys
 import mysql.connector as mc
+from main import MainWindow
 
 mydb = mc.connect(
     host="localhost",
@@ -42,7 +43,7 @@ class Ui_Form(object):
             passwd = self.lineEdit_2.text()
 
             mycursor = mydb.cursor()
-            query = "SELECT * FROM login_details WHERE BINARY username = '%s' AND BINARY password = '%s'" % (username, passwd)
+            query = "SELECT * FROM login WHERE BINARY username = '%s' AND BINARY password = '%s'" % (username, passwd)
             mycursor.execute(query)
             result = mycursor.fetchone()
 
@@ -51,7 +52,8 @@ class Ui_Form(object):
                 self.show_popup("Login Failed, Check Username and Password", "Login Failed", 'Failed')
             else:
                 self.show_popup("Login Success, Welcome!!", "Success", 'Success')
-
+                self.close()
+                MainWindow().show()
         except mc.Error as e:
             print('failed')
 
