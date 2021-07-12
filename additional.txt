@@ -1,0 +1,4 @@
+1. save upload image to project folder
+2. popup with all the details
+3. issue on resize to fit image
+4. remove punctuation marks from plate number

@@ -12,8 +12,6 @@ from PySide2.QtCore import *
 from PySide2.QtGui import *
 from PySide2.QtWidgets import *
 
-from functions import browseFiles
-
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
@@ -386,7 +384,6 @@ class Ui_MainWindow(object):
         self.label_11.setText("")
         self.btnNew_2.setText(QCoreApplication.translate("MainWindow", u"New", None))
         self.btnBrowse.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
-        # self.btnBrowse.clicked.connect(self.showImage)
         self.btnScan.setText(QCoreApplication.translate("MainWindow", u"Scan", None))
         self.btnView.setText(QCoreApplication.translate("MainWindow", u"View", None))
         self.btnDelete.setText(QCoreApplication.translate("MainWindow", u"Delete", None))
