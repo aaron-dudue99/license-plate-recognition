@@ -341,7 +341,7 @@ class Ui_MainWindow(object):
         self.comboBox.setObjectName(u"comboBox")
         self.comboBox.setGeometry(QRect(230, 310, 201, 22))
         self.comboBox.setFont(font2)
-        self.posts = ["Lecturers' Bay", "Staff Bay"]
+        self.posts = ["Lecturers Bay", "Staff Bay"]
         self.comboBox.addItems(self.posts)
         self.comboBox.setStyleSheet(u"color: #fff;")
         self.btnSave = QPushButton(self.new_car)

@@ -39,10 +39,12 @@ class MainWindow(QMainWindow):
 		#instance variables
 		self.imageToScan = ""
 		self.scannedNum = ""
+		self.result = ""
 
 		#binding buttons to functions
 		self.ui.btnBrowse.clicked.connect(self.showImage)
 		self.ui.btnScan.clicked.connect(self.scanPlate)
+		self.ui.btnSave.clicked.connect(self.saveToDB)
 
 	def show_popup(self,message,title,status):
 		msgBox = QMessageBox()
@@ -60,7 +62,13 @@ class MainWindow(QMainWindow):
 			msgBox.setIcon(QMessageBox.Question)
 			msgBox.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
 
-		ret = msgBox.exec_()
+		elif status == "Warning":
+			msgBox.setIcon(QMessageBox.Warning)
+			msgBox.setStandardButtons(QMessageBox.Ok)
+
+		msgBox.show()
+		self.result = msgBox.exec_()
+		
 		
 
 	def tr(self, text):
@@ -85,14 +93,63 @@ class MainWindow(QMainWindow):
 			if result == None:
 				# print('No results For that plate')
 				self.show_popup("Plate not in database, Add it Now?", "Add New", "Question")
+				if self.result == QMessageBox.Yes:
+					self.ui.lineEdit.setText(platenum)
+					self.ui.stackedWidget.setCurrentWidget(self.ui.new_car)
+				else:
+					# do no-action
+					pass
 
+				
 			else:
 				print('Car ' + platenum + ' in database')
 				print(result)
 		except:
 			pass
 
-		print('Scanned Num called')
+		# print('Scanned Num called')
+
+	def saveToDB(self):
+		plate = self.ui.lineEdit.text()
+		v_make = self.ui.lineEdit_2.text()
+		v_model = self.ui.lineEdit_3.text()
+		id_num = self.ui.lineEdit_4.text()
+		position = self.ui.comboBox_2.currentText()
+		f_name = self.ui.lineEdit_6.text()
+		p_area = self.ui.comboBox.currentText()
+
+		# Some validation rules 
+		if plate == "":
+			self.show_popup('Please Enter Plate Number', 'Number Empty', 'Failed' )
+		elif v_make == "":
+			self.show_popup('Please Enter Vehicle Make', 'Make Empty', 'Failed' )
+		elif v_model == "":
+			self.show_popup('Please Enter Vehicle Model', 'Model Empty', 'Failed' )
+		elif id_num == "":
+			self.show_popup('Please Enter National Id Number', 'Number Empty', 'Failed' )
+		elif f_name == "":
+			self.show_popup('Please Enter Full Name', 'Name Empty', 'Failed' )
+
+		elif position == "Staff" and p_area == "Lecturers Bay":
+			self.show_popup("Staff cannot park in the Lecturers' Parking Area", "Wrong Parking", "Warning")
+
+		elif position == "Lecturer" and p_area == "Staff Bay":
+			self.show_popup("Lecturers cannot park in the Staff Parking Area", "Wrong Parking", "Warning")
+
+		# stri = plate + " "+ v_make+" "+v_model+" "+id_num+" "+position+" "+f_name+" "+ p_area
+		# print(stri)
+
+		else:
+
+			try:
+				mycursor = mydb.cursor()
+				query = "INSERT INTO vehicles(`license_plate`,`vehicle_make`, `model`, `national_id`, `Full Name`, `position`, `parking_area` ) VALUES (%s,%s,%s,%s,%s,%s,%s)"
+				val = (plate,v_make,v_model,id_num,f_name,position, p_area)
+				mycursor.execute(query, val)
+				mydb.commit()
+				
+			except Exception as e:
+				pass
 
 	def scanPlate(self, image):
 		image = self.imageToScan
