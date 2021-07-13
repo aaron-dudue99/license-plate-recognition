@@ -12,7 +12,15 @@ import numpy as np
 from matplotlib import pyplot as plt
 import imutils
 import easyocr
+import mysql.connector as mc
+from login import *;
 
+mydb = mc.connect(
+    host="localhost",
+    user="root",
+    passwd="@ADS5188y",
+    database="license_plate_rec"
+)
 class MainWindow(QMainWindow):
 	def __init__(self):
 		QMainWindow.__init__(self)
@@ -31,6 +39,7 @@ class MainWindow(QMainWindow):
 		#instance variables
 		self.imageToScan = ""
 		self.scannedNum = ""
+
 		#binding buttons to functions
 		self.ui.btnBrowse.clicked.connect(self.showImage)
 		self.ui.btnScan.clicked.connect(self.scanPlate)
@@ -46,6 +55,11 @@ class MainWindow(QMainWindow):
 
 		elif status == "Success":
 			msgBox.setIcon(QMessageBox.Information)
+
+		elif status == "Question":
+			msgBox.setIcon(QMessageBox.Question)
+			msgBox.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+
 		ret = msgBox.exec_()
 		
 
@@ -58,7 +72,27 @@ class MainWindow(QMainWindow):
 		self.ui.lineEdit_5.setText(path_to_file)
 		pixmap = QPixmap(path_to_file)
 		self.ui.label_11.setPixmap(QPixmap(pixmap))
-		self.resize(pixmap.width(),pixmap.height())
+		# self.resize(pixmap.width(),pixmap.height())
+
+	def searchdb(self,platenum):
+		print(platenum)
+		try:
+			mycursor = mydb.cursor()
+			query = "SELECT * from vehicles WHERE license_plate = '" + platenum + "'"
+			mycursor.execute(query)
+			result = mycursor.fetchone()
+
+			if result == None:
+				# print('No results For that plate')
+				self.show_popup("Plate not in database, Add it Now?", "Add New", "Question")
+
+			else:
+				print('Car ' + platenum + ' in database')
+				print(result)
+		except:
+			pass
+
+		print('Scanned Num called')
 
 	def scanPlate(self, image):
 		image = self.imageToScan
@@ -83,21 +117,29 @@ class MainWindow(QMainWindow):
 				if len(approx) == 4:
 					location = approx
 					break
+			
+			try:
+				if location.size == 0:
+					Ui_Form.show_popup(Ui_Form,"No Plate Detected, Please use a different image", "no plate", "Failed")
+					return
 
-			print(location)
+				else:
+					mask = np.zeros(gray.shape, np.uint8)
+					new_image = cv2.drawContours(mask,[location], 0,255,-1)
+					new_image = cv2.bitwise_and(img,img,mask = mask)
+					(x,y) = np.where(mask == 255)
+					(x1,y1) = (np.min(x), np.min(y))
+					(x2,y2) = (np.max(x), np.max(y))
+					cropped_image = gray[x1:x2+1, y1:y2+1]
+					reader = easyocr.Reader(['en'])
+					result = reader.readtext(cropped_image)
+					print(result)
+					self.scannedNum = result[0][-2]
+					print(self.scannedNum)
+					self.searchdb(self.scannedNum)
 
-			mask = np.zeros(gray.shape, np.uint8)
-			new_image = cv2.drawContours(mask,[location], 0,255,-1)
-			new_image = cv2.bitwise_and(img,img,mask = mask)
-			(x,y) = np.where(mask == 255)
-			(x1,y1) = (np.min(x), np.min(y))
-			(x2,y2) = (np.max(x), np.max(y))
-			cropped_image = gray[x1:x2+1, y1:y2+1]
-			reader = easyocr.Reader(['en'])
-			result = reader.readtext(cropped_image)
-			print(result)
-			self.scannedNum = result[0][-2]
-			print(self.scannedNum)
+			except Exception as e:
+				print(e)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

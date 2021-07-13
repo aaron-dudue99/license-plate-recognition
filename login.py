@@ -35,6 +35,8 @@ class Ui_Form(object):
         elif status == "Success":
             msg.setIcon(QMessageBox.Information)
 
+       
+
         x= msg.exec_()
 
     def login(self):
