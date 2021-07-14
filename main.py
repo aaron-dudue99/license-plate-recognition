@@ -57,6 +57,9 @@ class MainWindow(QMainWindow):
         self.ui.btnScan.clicked.connect(self.scanPlate)
         self.ui.btnSave.clicked.connect(self.saveToDB)
 
+    # def startAnimation(self):
+    #     self.movie.start()
+   
     def loadData(self):
         try:
             mycursor = mydb.cursor()
@@ -70,7 +73,7 @@ class MainWindow(QMainWindow):
 
             for row in result:
                 self.ui.tableWidget.setItem(
-                    tablerow, 0,PySide2.QtWidgets.QTableWidgetItem(row[0]))
+                    tablerow, 0, PySide2.QtWidgets.QTableWidgetItem(row[0]))
                 self.ui.tableWidget.setItem(
                     tablerow, 1, PySide2.QtWidgets.QTableWidgetItem(row[1]))
                 self.ui.tableWidget.setItem(
@@ -84,8 +87,6 @@ class MainWindow(QMainWindow):
                 self.ui.tableWidget.setItem(
                     tablerow, 6, PySide2.QtWidgets.QTableWidgetItem(row[6]))
                 tablerow += 1
-
-				
 
         except Exception as e:
             print(e)
@@ -201,16 +202,20 @@ class MainWindow(QMainWindow):
                                 "Success", "Success")
                 self.ui.stackedWidget.setCurrentWidget(self.ui.homepage)
             except Exception as e:
-                pass
+                return
 
     def scanPlate(self, image):
         image = self.imageToScan
+        # self.movie = QMovie("loader.gif")
+        # self.ui.loadingLabel.setMovie(self.movie)
+        # self.startAnimation()
 
         if image == "":
             self.show_popup("You need to Upload an image First",
                             "Empty Image", "Failed")
 
         else:
+
             img = cv2.imread(self.imageToScan)
             gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
             plt.imshow(cv2.cvtColor(gray, cv2.COLOR_BGR2RGB))
