@@ -18,7 +18,7 @@ from matplotlib import pyplot as plt
 import imutils
 import easyocr
 import mysql.connector as mc
-from login import *
+# from login import *
 
 mydb = mc.connect(
     host="localhost",
@@ -59,7 +59,7 @@ class MainWindow(QMainWindow):
 
     # def startAnimation(self):
     #     self.movie.start()
-   
+
     def loadData(self):
         try:
             mycursor = mydb.cursor()
@@ -146,7 +146,8 @@ class MainWindow(QMainWindow):
                     pass
 
             else:
-                pop_message = "Car, " +platenum+ " belongs to "+result[5]+ " , "+ result[4]
+                pop_message = "Car, " + platenum + \
+                    " belongs to "+result[5] + " , " + result[4]
                 self.show_popup(pop_message, "Car Found", "Success")
                 self.ui.lineEdit_5.setText("")
         except:
@@ -201,7 +202,7 @@ class MainWindow(QMainWindow):
                 mydb.commit()
                 self.show_popup("Record Added Successfully",
                                 "Success", "Success")
-                
+
                 self.ui.lineEdit_5.setText("")
                 self.ui.stackedWidget.setCurrentWidget(self.ui.homepage)
                 self.loadData()
@@ -240,8 +241,8 @@ class MainWindow(QMainWindow):
 
             try:
                 if location is None:
-                    Ui_Form.show_popup(
-                        Ui_Form, "No Plate Detected, Please use a different image", "no plate", "Failed")
+                    self.show_popup(
+                        "No Plate Detected, Please use a different image", "no plate", "Failed")
                     return
 
                 else:
