@@ -12,6 +12,7 @@ from PySide2.QtCore import *
 from PySide2.QtGui import *
 from PySide2.QtWidgets import *
 
+
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
@@ -230,15 +231,45 @@ class Ui_MainWindow(object):
         self.cars = QWidget()
         self.cars.setObjectName(u"cars")
         self.tableWidget = QTableWidget(self.cars)
+        if (self.tableWidget.columnCount() < 7):
+            self.tableWidget.setColumnCount(7)
+        font4 = QFont()
+        font4.setFamily(u"EB Garamond SemiBold Italic")
+        font4.setPointSize(11)
+        font4.setBold(True)
+        font4.setItalic(True)
+        font4.setWeight(75)
+        __qtablewidgetitem = QTableWidgetItem()
+        __qtablewidgetitem.setFont(font4);
+        self.tableWidget.setHorizontalHeaderItem(0, __qtablewidgetitem)
+        __qtablewidgetitem1 = QTableWidgetItem()
+        __qtablewidgetitem1.setFont(font4);
+        self.tableWidget.setHorizontalHeaderItem(1, __qtablewidgetitem1)
+        __qtablewidgetitem2 = QTableWidgetItem()
+        __qtablewidgetitem2.setFont(font4);
+        self.tableWidget.setHorizontalHeaderItem(2, __qtablewidgetitem2)
+        __qtablewidgetitem3 = QTableWidgetItem()
+        __qtablewidgetitem3.setFont(font4);
+        self.tableWidget.setHorizontalHeaderItem(3, __qtablewidgetitem3)
+        __qtablewidgetitem4 = QTableWidgetItem()
+        __qtablewidgetitem4.setFont(font4);
+        self.tableWidget.setHorizontalHeaderItem(4, __qtablewidgetitem4)
+        __qtablewidgetitem5 = QTableWidgetItem()
+        __qtablewidgetitem5.setFont(font4);
+        self.tableWidget.setHorizontalHeaderItem(5, __qtablewidgetitem5)
+        __qtablewidgetitem6 = QTableWidgetItem()
+        __qtablewidgetitem6.setFont(font4);
+        self.tableWidget.setHorizontalHeaderItem(6, __qtablewidgetitem6)
         self.tableWidget.setObjectName(u"tableWidget")
         self.tableWidget.setGeometry(QRect(10, 120, 891, 281))
+        self.tableWidget.setStyleSheet(u"")
         self.btnView = QPushButton(self.cars)
         self.btnView.setObjectName(u"btnView")
         self.btnView.setGeometry(QRect(290, 430, 111, 31))
-        font4 = QFont()
-        font4.setFamily(u"EB Garamond Medium")
-        font4.setPointSize(14)
-        self.btnView.setFont(font4)
+        font5 = QFont()
+        font5.setFamily(u"EB Garamond Medium")
+        font5.setPointSize(14)
+        self.btnView.setFont(font5)
         self.btnView.setCursor(QCursor(Qt.PointingHandCursor))
         self.btnView.setStyleSheet(u"background-color:#fca311;\n"
 "border-radius: 8px;\n"
@@ -249,7 +280,7 @@ class Ui_MainWindow(object):
         self.btnDelete = QPushButton(self.cars)
         self.btnDelete.setObjectName(u"btnDelete")
         self.btnDelete.setGeometry(QRect(500, 430, 111, 31))
-        self.btnDelete.setFont(font4)
+        self.btnDelete.setFont(font5)
         self.btnDelete.setCursor(QCursor(Qt.PointingHandCursor))
         self.btnDelete.setStyleSheet(u"background-color:red;\n"
 "border-radius: 8px;\n"
@@ -328,10 +359,10 @@ class Ui_MainWindow(object):
         self.comboBox_2 = QComboBox(self.groupBox_2)
         self.comboBox_2.setObjectName(u"comboBox_2")
         self.comboBox_2.setGeometry(QRect(140, 70, 181, 22))
-        self.positions = ['Lecturer', 'Staff']
-        self.comboBox_2.addItems(self.positions)
         self.comboBox_2.setFont(font2)
         self.comboBox_2.setFrame(True)
+        self.positions = ['Lecturer', 'Staff']
+        self.comboBox_2.addItems(self.positions)
         self.label_8 = QLabel(self.new_car)
         self.label_8.setObjectName(u"label_8")
         self.label_8.setGeometry(QRect(100, 310, 111, 16))
@@ -341,13 +372,13 @@ class Ui_MainWindow(object):
         self.comboBox.setObjectName(u"comboBox")
         self.comboBox.setGeometry(QRect(230, 310, 201, 22))
         self.comboBox.setFont(font2)
+        self.comboBox.setStyleSheet(u"color: #fff;")
         self.posts = ["Lecturers Bay", "Staff Bay"]
         self.comboBox.addItems(self.posts)
-        self.comboBox.setStyleSheet(u"color: #fff;")
         self.btnSave = QPushButton(self.new_car)
         self.btnSave.setObjectName(u"btnSave")
         self.btnSave.setGeometry(QRect(380, 380, 111, 31))
-        self.btnSave.setFont(font4)
+        self.btnSave.setFont(font5)
         self.btnSave.setCursor(QCursor(Qt.PointingHandCursor))
         self.btnSave.setStyleSheet(u"background-color:#fca311;\n"
 "border-radius: 8px;\n"
@@ -385,6 +416,20 @@ class Ui_MainWindow(object):
         self.btnNew_2.setText(QCoreApplication.translate("MainWindow", u"New", None))
         self.btnBrowse.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
         self.btnScan.setText(QCoreApplication.translate("MainWindow", u"Scan", None))
+        ___qtablewidgetitem = self.tableWidget.horizontalHeaderItem(0)
+        ___qtablewidgetitem.setText(QCoreApplication.translate("MainWindow", u"License_Plate", None));
+        ___qtablewidgetitem1 = self.tableWidget.horizontalHeaderItem(1)
+        ___qtablewidgetitem1.setText(QCoreApplication.translate("MainWindow", u"Vehicle_make", None));
+        ___qtablewidgetitem2 = self.tableWidget.horizontalHeaderItem(2)
+        ___qtablewidgetitem2.setText(QCoreApplication.translate("MainWindow", u"Vehicle Model", None));
+        ___qtablewidgetitem3 = self.tableWidget.horizontalHeaderItem(3)
+        ___qtablewidgetitem3.setText(QCoreApplication.translate("MainWindow", u"Id_Number", None));
+        ___qtablewidgetitem4 = self.tableWidget.horizontalHeaderItem(4)
+        ___qtablewidgetitem4.setText(QCoreApplication.translate("MainWindow", u"Position", None));
+        ___qtablewidgetitem5 = self.tableWidget.horizontalHeaderItem(5)
+        ___qtablewidgetitem5.setText(QCoreApplication.translate("MainWindow", u"Full_Name", None));
+        ___qtablewidgetitem6 = self.tableWidget.horizontalHeaderItem(6)
+        ___qtablewidgetitem6.setText(QCoreApplication.translate("MainWindow", u"Parking_Area", None));
         self.btnView.setText(QCoreApplication.translate("MainWindow", u"View", None))
         self.btnDelete.setText(QCoreApplication.translate("MainWindow", u"Delete", None))
         self.label_9.setText(QCoreApplication.translate("MainWindow", u"List of All Cars", None))
@@ -403,22 +448,8 @@ class Ui_MainWindow(object):
         self.label_7.setText(QCoreApplication.translate("MainWindow", u"Full Name", None))
         self.label_8.setText(QCoreApplication.translate("MainWindow", u"Parking Area", None))
         self.btnSave.setText(QCoreApplication.translate("MainWindow", u"Save", None))
+
+        self.tableWidget.setColumnWidth(5, 250)
+        self.tableWidget.setColumnWidth(6, 135)
     # retranslateUi
 
-class ImageViewer(QWidget):
-    def __init__(self, image_path):
-        super().__init__()
-
-        self.scene = QGraphicsScene()
-        self.view = QGraphicsView(self.scene)
-        layout = QVBoxLayout()
-        layout.addWidget(self.view)
-        self.setLayout(layout)
-
-        self.load_image(image_path)
-
-    def load_image(self, image_path):
-        pixmap = QPixmap(image_path)
-        self.scene.addPixmap(pixmap)
-        self.view.fitInView(QRectF(0, 0, pixmap.width(), pixmap.height()), Qt.KeepAspectRatio)
-        self.scene.update()

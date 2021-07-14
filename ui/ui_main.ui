@@ -518,6 +518,107 @@ QPushButton:hover {
                 <height>281</height>
                </rect>
               </property>
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
+              <column>
+               <property name="text">
+                <string>License_Plate</string>
+               </property>
+               <property name="font">
+                <font>
+                 <family>EB Garamond SemiBold Italic</family>
+                 <pointsize>11</pointsize>
+                 <weight>75</weight>
+                 <italic>true</italic>
+                 <bold>true</bold>
+                </font>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Vehicle_make</string>
+               </property>
+               <property name="font">
+                <font>
+                 <family>EB Garamond SemiBold Italic</family>
+                 <pointsize>11</pointsize>
+                 <weight>75</weight>
+                 <italic>true</italic>
+                 <bold>true</bold>
+                </font>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Vehicle Model</string>
+               </property>
+               <property name="font">
+                <font>
+                 <family>EB Garamond SemiBold Italic</family>
+                 <pointsize>11</pointsize>
+                 <weight>75</weight>
+                 <italic>true</italic>
+                 <bold>true</bold>
+                </font>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Id_Number</string>
+               </property>
+               <property name="font">
+                <font>
+                 <family>EB Garamond SemiBold Italic</family>
+                 <pointsize>11</pointsize>
+                 <weight>75</weight>
+                 <italic>true</italic>
+                 <bold>true</bold>
+                </font>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Position</string>
+               </property>
+               <property name="font">
+                <font>
+                 <family>EB Garamond SemiBold Italic</family>
+                 <pointsize>11</pointsize>
+                 <weight>75</weight>
+                 <italic>true</italic>
+                 <bold>true</bold>
+                </font>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Full_Name</string>
+               </property>
+               <property name="font">
+                <font>
+                 <family>EB Garamond SemiBold Italic</family>
+                 <pointsize>11</pointsize>
+                 <weight>75</weight>
+                 <italic>true</italic>
+                 <bold>true</bold>
+                </font>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Parking_Area</string>
+               </property>
+               <property name="font">
+                <font>
+                 <family>EB Garamond SemiBold Italic</family>
+                 <pointsize>11</pointsize>
+                 <weight>75</weight>
+                 <italic>true</italic>
+                 <bold>true</bold>
+                </font>
+               </property>
+              </column>
              </widget>
              <widget class="QPushButton" name="btnView">
               <property name="geometry">

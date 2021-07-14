@@ -147,7 +147,7 @@ class MainWindow(QMainWindow):
 				val = (plate,v_make,v_model,id_num,f_name,position, p_area)
 				mycursor.execute(query, val)
 				mydb.commit()
-				
+				self.show_popup("Record Added Successfully", "Success", "Success")
 			except Exception as e:
 				pass
 
